@@ -15,33 +15,41 @@ import '@fontsource/roboto/700.css';
 import NotFound from './components/NotFound/NotFound';
 import About from './container/About/About';
 import Home from './container/Home/Home';
+import Results from './container/Results/Results';
 import { rootTheme } from './theme';
 
-const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <App />,
-		children: [
-			{
-				errorElement: <NotFound />,
-				children: [
-					{
-						index: true,
-						element: <Home />,
-					},
-					{
-						path: 'About',
-						element: <About />,
-					},
-					{
-						path: '*',
-						element: <NotFound />,
-					},
-				],
-			},
-		],
-	},
-]);
+const router = createBrowserRouter(
+	[
+		{
+			path: '/',
+			element: <App />,
+			children: [
+				{
+					errorElement: <NotFound />,
+					children: [
+						{
+							index: true,
+							element: <Home />,
+						},
+						{
+							path: 'about',
+							element: <About />,
+						},
+						{
+							path: 'results/patientId/:patientId',
+							element: <Results />,
+						},
+						{
+							path: '*',
+							element: <NotFound />,
+						},
+					],
+				},
+			],
+		},
+	],
+	{ basename: '/clinical-decision-support-app' },
+);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
