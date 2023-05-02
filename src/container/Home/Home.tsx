@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import GridTable from '../../components/GridTable/GridTable';
 import { define } from '../../constant/grid-column-define';
 import { useGridColDef } from '../../hooks/useGridColDef';
+import { ResultQueryData } from '../../types/result-query-data';
 
 // import classes from "./Home.module.scss";
 
@@ -88,9 +89,8 @@ function Home() {
 	};
 
 	const handleButtonClick = useCallback(
-		(params: ICellRendererParams) => {
-			console.log(params);
-			navigate(`/reporting/history/studyInstanceUID`);
+		(params: ICellRendererParams<ResultQueryData>) => {
+			navigate(`/results/patientId/${params.data?.patientId}`);
 		},
 		[navigate],
 	);

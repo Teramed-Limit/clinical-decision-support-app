@@ -38,7 +38,7 @@ function App() {
 					</Box>
 				</Toolbar>
 			</AppBar>
-			<Box id="detail" sx={{ flex: '1 1 auto' }}>
+			<Box id="detail" sx={{ flex: '1 1 auto', overflow: 'auto' }}>
 				<Outlet />
 			</Box>
 		</Box>
