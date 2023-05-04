@@ -13,7 +13,8 @@
 		"lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
 		"lint": "yarn lint:format && yarn lint:fix ",
 		"type-check": "tsc",
-		"gc": "npx generate-react-cli component"
+		"gc": "npx generate-react-cli component",
+		"jsonserver": "json-server --watch src/fake-data/db.json --routes src/fake-data/routes.json --port 3004"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.10.6",
