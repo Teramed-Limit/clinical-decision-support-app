@@ -1,20 +1,43 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-const instance = axios.create({
-	baseURL: import.meta.env.VITE_BASE_URL,
-});
+import { Environment } from '../../types/environment';
 
-const request = <T, D = any>(method: string, url: string, data?: D) =>
-	instance({
+let instance: AxiosInstance | null = null;
+
+export const fetchAppConfig = async (): Promise<void> => {
+	try {
+		const response = await axios.get('/config.json');
+		const config: Environment = response.data;
+
+		if (!config) {
+			instance = axios;
+		} else {
+			instance = axios.create({ baseURL: config.ip_address });
+		}
+	} catch (error) {
+		console.error('Error fetching config:', error);
+		instance = axios;
+	}
+};
+
+const request = async <T, D = any>(method: string, url: string, data?: D) => {
+	if (!instance) {
+		throw new Error('Instance not created yet');
+	}
+
+	const response: AxiosResponse<T> = await instance({
 		method,
 		url,
 		data,
-	}).then((response: AxiosResponse<T>) => response.data);
+	});
 
-export const get = <T, D>(url: string, params?: D) => request<T, D>('get', url, params);
+	return response.data;
+};
 
-export const post = <T, D>(url: string, data?: D) => request<T, D>('post', url, data);
+export const get = <T = any, D = any>(url: string, params?: D) => request<T, D>('get', url, params);
 
-export const put = <T, D>(url: string, data?: D) => request<T, D>('put', url, data);
+export const post = <T = any, D = any>(url: string, data?: D) => request<T, D>('post', url, data);
 
-export const del = <T, D>(url: string, data?: D) => request<T, D>('delete', url, data);
+export const put = <T = any, D = any>(url: string, data?: D) => request<T, D>('put', url, data);
+
+export const del = <T = any, D = any>(url: string, data?: D) => request<T, D>('delete', url, data);

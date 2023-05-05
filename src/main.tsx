@@ -17,6 +17,7 @@ import About from './container/About/About';
 import Home from './container/Home/Home';
 import Results from './container/Results/Results';
 import { rootTheme } from './theme';
+import { fetchAppConfig } from './utils/api/api';
 
 const router = createBrowserRouter(
 	[
@@ -51,13 +52,15 @@ const router = createBrowserRouter(
 	{ basename: '/clinical-decision-support-app' },
 );
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-	<React.StrictMode>
-		<ThemeProvider theme={rootTheme}>
-			<CssBaseline />
-			<RecoilRoot>
-				<RouterProvider router={router} />
-			</RecoilRoot>
-		</ThemeProvider>
-	</React.StrictMode>,
-);
+fetchAppConfig().then(() => {
+	ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+		<React.StrictMode>
+			<ThemeProvider theme={rootTheme}>
+				<CssBaseline />
+				<RecoilRoot>
+					<RouterProvider router={router} />
+				</RecoilRoot>
+			</ThemeProvider>
+		</React.StrictMode>,
+	);
+});
