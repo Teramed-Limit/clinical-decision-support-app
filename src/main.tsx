@@ -13,7 +13,6 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import NotFound from './components/NotFound/NotFound';
-import About from './container/About/About';
 import Home from './container/Home/Home';
 import Results from './container/Results/Results';
 import { rootTheme } from './theme';
@@ -33,11 +32,7 @@ const router = createBrowserRouter(
 							element: <Home />,
 						},
 						{
-							path: 'about',
-							element: <About />,
-						},
-						{
-							path: 'results/patientId/:patientId',
+							path: 'results/seriesKey/:seriesKey',
 							element: <Results />,
 						},
 						{

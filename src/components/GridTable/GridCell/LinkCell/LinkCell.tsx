@@ -3,6 +3,7 @@ import { ICellRendererParams } from 'ag-grid-community/dist/lib/rendering/cellRe
 
 interface Props extends ICellRendererParams {
 	onClick: (params: any) => void;
+	label: string;
 }
 
 function LinkCell(props: Props) {
@@ -22,7 +23,7 @@ function LinkCell(props: Props) {
 					props?.onClick(props);
 				}}
 			>
-				{props.value}
+				{props?.label}
 			</Link>
 		</Box>
 	);

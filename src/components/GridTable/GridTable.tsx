@@ -1,13 +1,14 @@
-import { useRef } from 'react';
+import { ChangeEvent, useCallback, useMemo, useRef } from 'react';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-
-import { ColDef, FilterChangedEvent, GetRowIdFunc, GridApi, GridReadyEvent } from 'ag-grid-community';
+import Stack from '@mui/material/Stack';
+import { ColDef, ColumnApi, FilterChangedEvent, GetRowIdFunc, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { IRowNode } from 'ag-grid-community/dist/lib/interfaces/iRowNode';
 import { AgGridReact } from 'ag-grid-react';
 
 import { CellMapper } from './GridCell/cell-mapper';
+import classes from './GridTable.module.scss';
 
 interface Props<T> {
 	columnDefs: ColDef[];
@@ -41,33 +42,63 @@ function GridTable<T = any>({
 	onFilterChanged,
 }: Props<T>) {
 	const gridApi = useRef<GridApi<T> | null>(null);
+	const columnApi = useRef<ColumnApi | null>(null);
+
+	const defaultColDef = useMemo<ColDef>(() => {
+		return {
+			sortable: true,
+			resizable: true,
+		};
+	}, []);
 
 	const onGridReady = (params: GridReadyEvent<T>) => {
 		gridApi.current = params.api;
+		columnApi.current = params.columnApi;
 		gridReady?.(params);
+		gridApi.current?.paginationSetPageSize(10);
 	};
 
+	const onPageSizeChanged = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
+		gridApi.current?.paginationSetPageSize(Number(event.target.value));
+	}, []);
+
 	return (
-		<AgGridReact
-			domLayout={domLayout}
-			defaultColDef={{
-				resizable: true,
-			}}
-			isExternalFilterPresent={isExternalFilterPresent}
-			doesExternalFilterPass={filterRowFunction}
-			onGridReady={onGridReady}
-			rowData={rowData}
-			columnDefs={columnDefs}
-			pagination={pagination}
-			rowMultiSelectWithClick={checkboxSelect}
-			rowSelection={rowSelection}
-			onFirstDataRendered={(event) => (onFirstDataRendered ? onFirstDataRendered(event.api) : null)}
-			onSelectionChanged={(event) => (onSelectionChanged ? onSelectionChanged(event.api) : null)}
-			getRowId={getRowId}
-			components={{ ...CellMapper }}
-			tooltipShowDelay={0}
-			onFilterChanged={(e) => onFilterChanged?.(e)}
-		/>
+		<>
+			<AgGridReact
+				containerStyle={{ height: 'calc(100% - 19px)', width: '100%' }}
+				domLayout={domLayout}
+				defaultColDef={defaultColDef}
+				isExternalFilterPresent={isExternalFilterPresent}
+				doesExternalFilterPass={filterRowFunction}
+				onGridReady={onGridReady}
+				rowData={rowData}
+				columnDefs={columnDefs}
+				pagination={pagination}
+				paginationAutoPageSize={pagination}
+				rowMultiSelectWithClick={checkboxSelect}
+				rowSelection={rowSelection}
+				onFirstDataRendered={(event) => (onFirstDataRendered ? onFirstDataRendered(event.api) : null)}
+				onSelectionChanged={(event) => (onSelectionChanged ? onSelectionChanged(event.api) : null)}
+				getRowId={getRowId}
+				components={{ ...CellMapper }}
+				tooltipShowDelay={0}
+				onFilterChanged={(e) => onFilterChanged?.(e)}
+			/>
+			{/* Pagination enabled */}
+			{pagination && (
+				<Stack spacing={1} direction="row" className={classes.pageFooter}>
+					{/* Page Size: */}
+					<span>Page Size:</span>
+					<select defaultValue="10" onChange={onPageSizeChanged}>
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+						<option value="200">200</option>
+					</select>
+				</Stack>
+			)}
+		</>
 	);
 }
 

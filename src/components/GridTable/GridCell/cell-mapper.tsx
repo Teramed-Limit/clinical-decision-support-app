@@ -1,3 +1,4 @@
+import AnalyzeOrNavigateCell from './AnalyzeOrNavigateCell/AnalyzeOrNavigateCell';
 import ButtonCell from './ButtonCell/ButtonCell';
 import CheckboxCell from './CheckboxCell/CheckboxCell';
 import ChipCell from './ChipCell/ChipCell';
@@ -10,4 +11,5 @@ export const CellMapper = {
 	buttonRenderer: ButtonCell,
 	linkRenderer: LinkCell,
 	statusRenderer: StatusChipCell,
+	analyzeOrNavigateRenderer: AnalyzeOrNavigateCell,
 };

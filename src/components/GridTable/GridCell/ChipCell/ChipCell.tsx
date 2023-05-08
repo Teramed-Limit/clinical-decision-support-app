@@ -2,10 +2,31 @@ import { Box, Chip } from '@mui/material';
 import { ICellRendererParams } from 'ag-grid-community/dist/lib/rendering/cellRenderers/iCellRenderer';
 
 interface Props extends ICellRendererParams {
-	value: string[];
+	value: string;
+	color?: 'default' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+	variant?: 'filled' | 'outlined';
+	mappingValue?: {
+		color: 'default' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+		variant: 'filled' | 'outlined';
+		label: string;
+		value: string;
+	}[];
 }
 
-function ChipCell(props: Props) {
+function ChipCell({ value, color = 'default', variant = 'filled', mappingValue }: Props) {
+	let mappingLabel = value;
+	let mappingColor = color;
+	let mappingVariant = variant;
+
+	if (mappingValue) {
+		const mapping = mappingValue.find((item) => item.value === value);
+		if (mapping) {
+			mappingColor = mapping.color;
+			mappingVariant = mapping.variant;
+			mappingLabel = mapping.label;
+		}
+	}
+
 	return (
 		<Box
 			sx={{
@@ -14,11 +35,9 @@ function ChipCell(props: Props) {
 				height: '100%',
 			}}
 		>
-			{props.value?.map((label) => (
-				<Box key={label} sx={{ mr: '2px', display: 'flex', alignItems: 'center ' }}>
-					<Chip size="small" label={label} />
-				</Box>
-			))}
+			<Box sx={{ mr: '2px', display: 'flex', alignItems: 'center ' }}>
+				<Chip size="small" color={mappingColor} variant={mappingVariant} label={mappingLabel} />
+			</Box>
 		</Box>
 	);
 }

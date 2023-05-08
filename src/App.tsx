@@ -1,6 +1,7 @@
+import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
-import { Link, Outlet } from 'react-router-dom';
+import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 export async function loader() {
 	const contacts = await fetch('https://jsonplaceholder.typicode.com/todos/1').then((response) => response.json());
@@ -8,16 +9,13 @@ export async function loader() {
 }
 
 function App() {
-	// const { contacts } = useLoaderData();
+	// 路由跳轉
+	const navigate = useNavigate();
+	const navItems = [{ name: 'Home', path: '/', icon: <HomeIcon /> }];
 
-	const navItems = [
-		{ name: 'Home', path: '/' },
-		{ name: 'About', path: 'About' },
-		{
-			name: 'Contact',
-			path: 'Contact',
-		},
-	];
+	const navigateTo = (path: string) => {
+		navigate(path);
+	};
 
 	return (
 		<Box display="flex" flexDirection="column" sx={{ height: '100%', width: '100%' }}>
@@ -31,9 +29,14 @@ function App() {
 					</Typography>
 					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 						{navItems.map((item) => (
-							<Button key={item.name} sx={{ color: '#fff' }}>
-								<Link to={item.path}>{item.name}</Link>
-							</Button>
+							<IconButton
+								size="small"
+								key={item.name}
+								sx={{ color: '#fff', border: '2px solid #E0E3E7', borderRadius: '10px' }}
+								onClick={() => navigateTo(item.path)}
+							>
+								{item.icon}
+							</IconButton>
 						))}
 					</Box>
 				</Toolbar>
