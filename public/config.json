@@ -1,3 +1,5 @@
 {
-  "ip_address": "http://localhost:3004"
+  "ip_address": "http://localhost:7086",
+  "date_format": "dd-MMM-yyyy",
+  "datetime_format": "dd-MMM-yyyy HH:mm"
 }

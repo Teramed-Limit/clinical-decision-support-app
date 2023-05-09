@@ -1,13 +1,16 @@
-.chartContainer {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
+.image {
+    width: auto;
+    max-width: 100%;
     height: 100%;
-    width: 100%;
+    object-fit: contain;
+    object-position: center;
 }
 
-.title {
-    margin: auto;
-    padding: 0;
-    text-align: center;
+
+.imageContainer {
+    width: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
 }

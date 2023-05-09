@@ -12,6 +12,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import MessageAlert from './components/MessageAlert/MessageAlert';
 import NotFound from './components/NotFound/NotFound';
 import Home from './container/Home/Home';
 import Results from './container/Results/Results';
@@ -32,7 +33,7 @@ const router = createBrowserRouter(
 							element: <Home />,
 						},
 						{
-							path: 'results/seriesKey/:seriesKey',
+							path: 'results/studyInstanceUid/:studyInstanceUid',
 							element: <Results />,
 						},
 						{
@@ -54,6 +55,7 @@ fetchAppConfig().then(() => {
 				<CssBaseline />
 				<RecoilRoot>
 					<RouterProvider router={router} />
+					<MessageAlert />
 				</RecoilRoot>
 			</ThemeProvider>
 		</React.StrictMode>,

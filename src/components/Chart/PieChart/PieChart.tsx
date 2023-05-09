@@ -1,15 +1,9 @@
-import { Cell, Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from 'recharts';
+import { useState } from 'react';
 
-const data = [
-	{ name: 'cirrhosis_only', label: 'Cirrhosis only', value: 0.02186720259487629 },
-	{ name: 'cirrhosis_viral_hepatitis', label: 'Cirrhosis Viral Hepatitis', value: 0.028671493753790855 },
-	{ name: 'hcc_cirrhosis', label: 'HCC & Cirrhosis', value: 0.6937018632888794 },
-	{ name: 'hcc_only', label: 'HCC Only', value: 0.00402587465941906 },
-	{ name: 'hcc_viral_hepatitis', label: 'HCC & Viral Hepatitis', value: 0.00014487223234027624 },
-	{ name: 'hcc_viral_hepatitis_cirrhosis', label: 'HCC & Viral Cirrhosis Hepatitis', value: 0.24468663334846497 },
-	{ name: 'normal_liver', label: 'Normal Liver', value: 1.4341027963382658e-5 },
-	{ name: 'viral_hepatitis_only', label: 'Viral Hepatitis only', value: 0.006887716706842184 },
-];
+import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from 'recharts';
+
+import { ChartData, ChartDataFilter } from '../../../types/chart-data';
+import ChartFilter from '../ChartFilter/ChartFilter';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1919', '#19FFC5', '#C5FF19', '#1919FF'];
 
@@ -22,7 +16,7 @@ const renderActiveShape = (props: {
 	startAngle: any;
 	endAngle: any;
 	fill: any;
-	payload: any;
+	payload: ChartData;
 	percent: any;
 	value: any;
 }) => {
@@ -52,7 +46,7 @@ const renderActiveShape = (props: {
 			<path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
 			<circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
 			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fontSize="16px" fill="#333">
-				{`${payload.label}`}
+				{`${payload.key}`}
 			</text>
 			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={16} textAnchor={textAnchor} fontSize="16px" fill="#999">
 				{`(${(percent * 100).toFixed(2)}%)`}
@@ -61,28 +55,47 @@ const renderActiveShape = (props: {
 	);
 };
 
-function PieChartComp() {
+interface Props<T> {
+	data: T[];
+	filter?: boolean;
+}
+
+function PieChartComp<T extends ChartData>({ data = [], filter = false }: Props<T>) {
+	const [rawData, setRawData] = useState<ChartDataFilter[]>(
+		data.map((d) => ({
+			...d,
+			visible: true,
+		})),
+	);
+
+	// 過濾掉不可見的資料值
+	const filteredData = rawData.filter((d) => d.visible);
+
 	return (
-		<ResponsiveContainer>
-			<PieChart>
-				<Pie
-					data={data}
-					dataKey="value"
-					nameKey="name"
-					minAngle={0.1}
-					paddingAngle={15}
-					innerRadius={100}
-					fill="#82ca9d"
-					animationDuration={700}
-					label={renderActiveShape}
-				>
-					{data.map((entry, index) => (
-						<Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
-					))}
-				</Pie>
-				<Tooltip />
-			</PieChart>
-		</ResponsiveContainer>
+		<>
+			{/* 創建一個包含 checkbox 的水平 Stack，以控制資料值的顯示 */}
+			{filter && <ChartFilter data={rawData} onDataChange={setRawData} />}
+			<ResponsiveContainer>
+				<PieChart>
+					<Pie
+						data={filteredData}
+						dataKey="value"
+						nameKey="key"
+						minAngle={0.1}
+						paddingAngle={15}
+						innerRadius="40%"
+						outerRadius="70%"
+						fill="#82ca9d"
+						animationDuration={400}
+						label={renderActiveShape}
+					>
+						{filteredData.map((entry, index) => (
+							<Cell key={entry.key} fill={COLORS[index % COLORS.length]} />
+						))}
+					</Pie>
+				</PieChart>
+			</ResponsiveContainer>
+		</>
 	);
 }
 

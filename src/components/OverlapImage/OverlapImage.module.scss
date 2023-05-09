@@ -1,0 +1,25 @@
+.iconText {
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+
+    > svg:first-child {
+        margin-right: 5px;
+        font-size: 24px;
+    }
+
+    &.w350 {
+        width: 350px;
+    }
+}
+
+.headerInfo {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    width: 100%;
+    padding: 12px;
+    border-bottom: 1px solid #e2e7ee;
+    background-color: rgb(250, 251, 251);
+}
+

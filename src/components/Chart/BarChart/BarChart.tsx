@@ -1,57 +1,45 @@
+import { useState } from 'react';
+
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-const data = [
-	{
-		name: 'MORPH-2D-Diameter',
-		value: 3.6610461924727436e-180,
-	},
-	{
-		name: 'LHL-Firstorder-TotalEnergy',
-		value: 0.5,
-	},
-	{
-		name: 'HLH-Firstorder-Maximum',
-		value: 1.9201704976886885e-267,
-	},
-	{
-		name: 'HHH-GLSZM-SZNN,LHL-GLSZM-GLNU',
-		value: 5.67720709335919e-3077,
-	},
-	{
-		name: 'GLSZM-LAHGLE',
-		value: 0.0,
-	},
-	{
-		name: 'HLL-GLSZM-SZNU',
-		value: 0.5,
-	},
-	{
-		name: 'LLL-GLDM-SDLGLE',
-		value: 0.0,
-	},
-];
+import { ChartData, ChartDataFilter } from '../../../types/chart-data';
+import ChartFilter from '../ChartFilter/ChartFilter';
 
-function BarChartComp() {
+interface Props {
+	data: ChartData[];
+	filter?: boolean;
+}
+
+function BarChartComp({ data = [], filter = false }: Props) {
+	const [rawData, setRawData] = useState<ChartDataFilter[]>(data.map((d) => ({ ...d, visible: true })));
+
+	// 過濾掉不可見的資料值
+	const filteredData = rawData.filter((d) => d.visible);
+
 	return (
-		<ResponsiveContainer>
-			<BarChart
-				data={data}
-				layout="vertical"
-				margin={{
-					top: 5,
-					right: 30,
-					left: 230,
-					bottom: 5,
-				}}
-			>
-				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis type="number" />
-				<YAxis type="category" dataKey="name" />
-				<Tooltip />
-				<Legend />
-				<Bar dataKey="value" fill="#8884d8" />
-			</BarChart>
-		</ResponsiveContainer>
+		<>
+			{/* 創建一個包含 checkbox 的水平 Stack，以控制資料值的顯示 */}
+			{filter && <ChartFilter data={rawData} onDataChange={setRawData} />}
+			<ResponsiveContainer>
+				<BarChart
+					data={filteredData}
+					layout="vertical"
+					margin={{
+						top: 5,
+						right: 30,
+						left: 230,
+						bottom: 5,
+					}}
+				>
+					<CartesianGrid strokeDasharray="3 3" />
+					<XAxis type="number" />
+					<YAxis type="category" dataKey="key" />
+					<Tooltip />
+					<Legend />
+					<Bar dataKey="value" fill="#8884d8" />
+				</BarChart>
+			</ResponsiveContainer>
+		</>
 	);
 }
 

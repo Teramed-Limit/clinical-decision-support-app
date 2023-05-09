@@ -1,5 +1,6 @@
 import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 
+import EnvService from '../services/EnvService';
 import { StudyStatus } from '../types/enums/study-status';
 import { dateFilterParams } from '../utils/ag-grid-utils';
 import { convertToDate, stringFormatDate } from '../utils/date-utils';
@@ -8,33 +9,32 @@ export const define = {
 	main: {
 		colDef: [
 			{
-				field: 'patient_id',
+				field: 'patientId',
 				headerName: 'Patient Id',
 				width: 160,
 				filter: 'agTextColumnFilter',
 				floatingFilter: true,
 			},
 			{
-				field: 'name',
+				field: 'patientsName',
 				headerName: 'Patient Name',
 				width: 160,
 				filter: 'agTextColumnFilter',
 				floatingFilter: true,
 			},
 			{
-				field: 'upload_date_time',
+				field: 'searchDateTime',
 				headerName: 'Upload Date',
 				width: 180,
 				filter: 'agDateColumnFilter',
 				filterParams: dateFilterParams,
 				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
-					const date = stringFormatDate(params.value, 'yyyy-MM-dd HH:mm:ss');
-					return convertToDate(date, 'dd-MMM-yyyy HH:mm:ss');
+					if (params?.value) return convertToDate(new Date(params.value), EnvService.getDateTimeFormat());
 				},
 			},
 			{
-				field: 'study_date',
+				field: 'studyDate',
 				headerName: 'Exam Date',
 				width: 140,
 				filter: 'agDateColumnFilter',
@@ -42,56 +42,54 @@ export const define = {
 				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
 					const date = stringFormatDate(params.value, 'yyyyMMdd');
-					return convertToDate(date, 'dd-MMM-yyyy');
+					return convertToDate(date, EnvService.getDateFormat());
 				},
 			},
 			{
-				field: 'age',
+				field: 'patientsAge',
 				headerName: 'Age',
 				width: 100,
 				filter: 'agTextColumnFilter',
 				floatingFilter: true,
 			},
 			{
-				field: 'gender',
+				field: 'patientsSex',
 				headerName: 'Gender',
 				width: 100,
 				filter: 'agTextColumnFilter',
 				floatingFilter: true,
 			},
 			{
-				field: 'start_date_time',
+				field: 'processDateTime',
 				headerName: 'Start Date',
 				width: 180,
 				filter: 'agDateColumnFilter',
 				filterParams: dateFilterParams,
 				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
-					const date = stringFormatDate(params.value, 'yyyy-MM-dd HH:mm:ss');
-					return convertToDate(date, 'dd-MMM-yyyy HH:mm:ss');
+					if (params?.value) return convertToDate(new Date(params.value), EnvService.getDateTimeFormat());
 				},
 			},
 			{
-				field: 'end_date_time',
+				field: 'receiveDateTime',
 				headerName: 'End Date',
 				width: 180,
 				filter: 'agDateColumnFilter',
 				filterParams: dateFilterParams,
 				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
-					const date = stringFormatDate(params.value, 'yyyy-MM-dd HH:mm:ss');
-					return convertToDate(date, 'dd-MMM-yyyy HH:mm:ss');
+					if (params?.value) return convertToDate(new Date(params.value), EnvService.getDateTimeFormat());
 				},
 			},
 			{
-				field: 'description',
+				field: 'statusDescription',
 				headerName: 'Description',
 				width: 200,
 				filter: 'agTextColumnFilter',
 				floatingFilter: true,
 			},
 			{
-				field: 'status_code',
+				field: 'statusCode',
 				headerName: 'Status',
 				width: 120,
 				cellRenderer: 'chipRenderer',
@@ -110,7 +108,7 @@ export const define = {
 				},
 			},
 			{
-				field: 'series_key',
+				field: 'studyInstanceUID',
 				headerName: 'Action',
 				width: 120,
 				cellStyle: { padding: '4px' },

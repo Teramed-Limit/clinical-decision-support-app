@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
+import EnvService from '../../services/EnvService';
 import { Environment } from '../../types/environment';
 
 let instance: AxiosInstance | null = null;
@@ -8,6 +9,10 @@ export const fetchAppConfig = async (): Promise<void> => {
 	try {
 		const response = await axios.get('/config.json');
 		const config: Environment = response.data;
+
+		EnvService.setIpAddress(config.ip_address);
+		EnvService.setDateFormat(config.date_format);
+		EnvService.setDateTimeFormat(config.datetime_format);
 
 		if (!config) {
 			instance = axios;

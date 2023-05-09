@@ -1,3 +1,5 @@
 export interface Environment {
-	ip_address?: string;
+	ip_address: string;
+	date_format: string;
+	datetime_format: string;
 }

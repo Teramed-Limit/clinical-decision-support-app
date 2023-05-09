@@ -1,344 +1,277 @@
 {
   "result": {
-    "series_key": 4,
+    "segmentationPath": "\\segliverdata.png",
+    "saliencyMapPath": "\\saliencymap.png",
+    "studyUid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477",
     "confidence": [
       {
-        "name": "cirrhosis_only",
-        "label": "Cirrhosis only",
-        "value": 0.02186720259487629
+        "key": "Cirrhosis Only",
+        "value": 0.0005579108801612165
       },
       {
-        "name": "cirrhosis_viral_hepatitis",
-        "label": "Cirrhosis Viral Hepatitis",
-        "value": 0.028671493753790855
+        "key": "Cirrhosis Viral Hepatitis",
+        "value": 52.76671648025513
       },
       {
-        "name": "hcc_cirrhosis",
-        "label": "HCC & Cirrhosis",
-        "value": 0.6937018632888794
+        "key": "HCC & Cirrhosis",
+        "value": 1.3016540557146072
       },
       {
-        "name": "hcc_only",
-        "label": "HCC Only",
-        "value": 0.00402587465941906
+        "key": "HCC Only",
+        "value": 30.916908383369446
       },
       {
-        "name": "hcc_viral_hepatitis",
-        "label": "HCC & Viral Hepatitis",
-        "value": 0.00014487223234027624
+        "key": "HCC & Viral Hepatitis",
+        "value": 9.858838468790054
       },
       {
-        "name": "hcc_viral_hepatitis_cirrhosis",
-        "label": "HCC & Viral Cirrhosis Hepatitis",
-        "value": 0.24468663334846497
+        "key": "HCC & Viral Hepatitis Cirrhosis",
+        "value": 5.154365673661232
       },
       {
-        "name": "normal_liver",
-        "label": "Normal Liver",
-        "value": 0.000014341027963382658
+        "key": "Normal Liver",
+        "value": 1.5971504119249857e-7
       },
       {
-        "name": "viral_hepatitis_only",
-        "label": "Viral Hepatitis only",
-        "value": 0.006887716706842184
+        "key": "Viral Hepatitis Only",
+        "value": 0.0009542995940137189
       }
     ],
-    "segmentation_path": "\\TeramedNASSourcescdssharefolderserversegLiverdata114.png",
-    "saliencymap_path": "\\TeramedNASSourcescdssharefolderserversaliencymap114.png",
-    "similar_cases": [
+    "featureImportance": [
       {
-        "name": "D136",
-        "value": 0.3673663198148675
-      },
-      {
-        "name": "D108",
-        "value": 1.210397650733414
-      },
-      {
-        "name": "D117",
-        "value": 1.2645496876787636
-      },
-      {
-        "name": "D134",
-        "value": 1.3503364853152708
-      },
-      {
-        "name": "D132",
-        "value": 1.3732742940185232
-      },
-      {
-        "name": "D118",
-        "value": 1.4010892853764318
-      },
-      {
-        "name": "D135",
-        "value": 1.4649851834743066
-      },
-      {
-        "name": "D133",
-        "value": 1.61211590612349
-      },
-      {
-        "name": "D126",
-        "value": 1.6374771272305957
-      },
-      {
-        "name": "D097",
-        "value": 1.680019618958559
-      }
-    ],
-    "feature_importance": [
-      {
-        "name": "MORPH-2D-Diameter",
+        "key": "MORPH-2D-Diameter",
         "value": 3.6610461924727436e-180
       },
       {
-        "name": "LHL-Firstorder-TotalEnergy",
+        "key": "LHL-Firstorder-TotalEnergy",
         "value": 0.5
       },
       {
-        "name": "HLH-Firstorder-Maximum",
-        "value": 1.9201704976886885e-267
+        "key": "HLH-Firstorder-Maximum",
+        "value": 2.503654323393797e-283
       },
       {
-        "name": "HHH-GLSZM-SZNN,LHL-GLSZM-GLNU",
+        "key": "HHH-GLSZM-SZNN,LHL-GLSZM-GLNU",
+        "value": 4.157848222415967e-307
+      },
+      {
+        "key": "GLSZM-LAHGLE",
         "value": 0
       },
       {
-        "name": "GLSZM-LAHGLE",
-        "value": 0
-      },
-      {
-        "name": "HLL-GLSZM-SZNU",
+        "key": "HLL-GLSZM-SZNU",
         "value": 0.5
       },
       {
-        "name": "LLL-GLDM-SDLGLE"
+        "key": "LLL-GLDM-SDLGLE",
+        "value": 0
       }
     ],
-    "create_time": "2023-05-03 23:57:07",
-    "update_time": "2023-05-03 23:57:49"
+    "similarCases": [
+      {
+        "key": "Case229",
+        "value": 1.4058549248497334
+      },
+      {
+        "key": "Case046",
+        "value": 1.538941596177309
+      },
+      {
+        "key": "Case249",
+        "value": 1.5664954525919446
+      },
+      {
+        "key": "Case245",
+        "value": 1.9239307100647383
+      },
+      {
+        "key": "Case237",
+        "value": 1.9257288589648718
+      },
+      {
+        "key": "Case241",
+        "value": 1.9734223597186054
+      },
+      {
+        "key": "Case233",
+        "value": 2.057218961460939
+      },
+      {
+        "key": "Case004",
+        "value": 2.181809799115116
+      },
+      {
+        "key": "Case225",
+        "value": 2.5174771890201133
+      },
+      {
+        "key": "Case238",
+        "value": 2.5234872598978617
+      }
+    ]
   },
   "query": [
     {
-      "patient_key": 1,
-      "patient_id": "P0001",
-      "name": "Tom",
-      "date_of_birth": "",
-      "gender": "M",
-      "age": null,
-      "study_date": "20230517",
-      "description": "Liver 3mins  5.0  Br40  2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "200",
-      "upload_date_time": "2023-05-13 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 1,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477",
-      "series_key": 4,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048160"
+      "patientId": "patientId_1",
+      "patientsName": "病人姓名",
+      "patientsSex": "M",
+      "patientsBirthDate": "20000101",
+      "patientsAge": "23",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": "2023-05-01T14:52:04",
+      "processDateTime": "2023-05-01T14:52:04",
+      "processMessage": null,
+      "receiveDateTime": "2023-05-01T14:52:04",
+      "receiveMessage": null,
+      "statusCode": 200,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 2,
-      "patient_id": "P0001",
-      "name": "Tom",
-      "date_of_birth": "",
-      "gender": "M",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Abdomen PVP 1.0",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "ready",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 2,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.478",
-      "series_key": 5,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048161"
+      "patientId": "patientId_1",
+      "patientsName": "病人姓名",
+      "patientsSex": "M",
+      "patientsBirthDate": "20000101",
+      "patientsAge": "23",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": null,
+      "processDateTime": null,
+      "processMessage": null,
+      "receiveDateTime": null,
+      "receiveMessage": null,
+      "statusCode": 0,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 3,
-      "patient_id": "ghi",
-      "name": "ghi",
-      "date_of_birth": "",
-      "gender": "M",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "402",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 3,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.479",
-      "series_key": 6,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048162"
+      "patientId": "patientId_1",
+      "patientsName": "病人姓名",
+      "patientsSex": "M",
+      "patientsBirthDate": "20000101",
+      "patientsAge": "23",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": null,
+      "processDateTime": null,
+      "processMessage": null,
+      "receiveDateTime": null,
+      "receiveMessage": null,
+      "statusCode": 1,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 4,
-      "patient_id": "jkl",
-      "name": "jkl",
-      "date_of_birth": "",
-      "gender": "F",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "403",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 4,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.480",
-      "series_key": 7,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048163"
+      "patientId": "patientId_1",
+      "patientsName": "病人姓名",
+      "patientsSex": "M",
+      "patientsBirthDate": "20000101",
+      "patientsAge": "23",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": null,
+      "processDateTime": null,
+      "processMessage": null,
+      "receiveDateTime": null,
+      "receiveMessage": null,
+      "statusCode": null,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 5,
-      "patient_id": "mno",
-      "name": "mno",
-      "date_of_birth": "",
-      "gender": "M",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "500",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 5,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.481",
-      "series_key": 8,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048164"
+      "patientId": "patientId_2",
+      "patientsName": "病人姓名",
+      "patientsSex": "F",
+      "patientsBirthDate": "19930729",
+      "patientsAge": "40",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": null,
+      "processDateTime": null,
+      "processMessage": null,
+      "receiveDateTime": null,
+      "receiveMessage": null,
+      "statusCode": 401,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 6,
-      "patient_id": "pqr",
-      "name": "pqr",
-      "date_of_birth": "",
-      "gender": "F",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "analyzing",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 6,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.482",
-      "series_key": 9,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048165"
+      "patientId": "patientId_2",
+      "patientsName": "病人姓名",
+      "patientsSex": "F",
+      "patientsBirthDate": "19930729",
+      "patientsAge": "40",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": null,
+      "processDateTime": null,
+      "processMessage": null,
+      "receiveDateTime": null,
+      "receiveMessage": null,
+      "statusCode": 402,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 7,
-      "patient_id": "stu",
-      "name": "stu",
-      "date_of_birth": "",
-      "gender": "M",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "200",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 7,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.483",
-      "series_key": 10,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048166"
+      "patientId": "patientId_2",
+      "patientsName": "病人姓名",
+      "patientsSex": "F",
+      "patientsBirthDate": "19930729",
+      "patientsAge": "40",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": "2023-05-01T14:52:04",
+      "processDateTime": "2023-05-01T14:52:04",
+      "processMessage": null,
+      "receiveDateTime": "2023-05-01T14:52:04",
+      "receiveMessage": null,
+      "statusCode": 403,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 8,
-      "patient_id": "vwx",
-      "name": "vwx",
-      "date_of_birth": "",
-      "gender": "F",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "200",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 8,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.484",
-      "series_key": 11,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048167"
+      "patientId": "patientId_2",
+      "patientsName": "病人姓名",
+      "patientsSex": "F",
+      "patientsBirthDate": "19930729",
+      "patientsAge": "40",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": null,
+      "processDateTime": null,
+      "processMessage": null,
+      "receiveDateTime": null,
+      "receiveMessage": null,
+      "statusCode": 404,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     },
     {
-      "patient_key": 9,
-      "patient_id": "yz",
-      "name": "yz",
-      "date_of_birth": "",
-      "gender": "M",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "200",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 9,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.485",
-      "series_key": 12,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048168"
-    },
-    {
-      "patient_key": 10,
-      "patient_id": "123",
-      "name": "123",
-      "date_of_birth": "",
-      "gender": "F",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "200",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 10,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.486",
-      "series_key": 13,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048169"
-    },
-    {
-      "patient_key": 11,
-      "patient_id": "456",
-      "name": "456",
-      "date_of_birth": "",
-      "gender": "M",
-      "age": null,
-      "study_date": "20230417",
-      "description": "Liver 3mins 5.0 Br40 2",
-      "modality": "CT",
-      "status_description": "all the process finished successfully",
-      "status_code": "200",
-      "upload_date_time": "2023-05-03 23:56:47",
-      "start_date_time": "2023-05-03 23:56:47",
-      "end_date_time": "2023-05-03 23:56:47",
-      "study_key": 11,
-      "study_uid": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.487",
-      "series_key": 14,
-      "series_uid": "2.16.840.1.113669.632.21.30561.30561.375729122321563403048170"
+      "patientId": "patientId_2",
+      "patientsName": "病人姓名",
+      "patientsSex": "F",
+      "patientsBirthDate": "19930729",
+      "patientsAge": "40",
+      "modality": "MR",
+      "studyDate": "20230501",
+      "studyDescription": "研究描述1",
+      "searchDateTime": null,
+      "processDateTime": null,
+      "processMessage": null,
+      "receiveDateTime": null,
+      "receiveMessage": null,
+      "statusCode": 500,
+      "statusDescription": null,
+      "studyInstanceUID": "2.16.840.1.113669.632.21.30561.30561.10715159342688700515472.477"
     }
   ]
 }

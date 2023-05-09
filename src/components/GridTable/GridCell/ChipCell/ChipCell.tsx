@@ -19,7 +19,7 @@ function ChipCell({ value, color = 'default', variant = 'filled', mappingValue }
 	let mappingVariant = variant;
 
 	if (mappingValue) {
-		const mapping = mappingValue.find((item) => item.value === value);
+		const mapping = mappingValue.find((item) => item?.value === value);
 		if (mapping) {
 			mappingColor = mapping.color;
 			mappingVariant = mapping.variant;

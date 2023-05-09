@@ -3,40 +3,39 @@ import { useCallback } from 'react';
 import { Box, Button, Link } from '@mui/material';
 import { ICellRendererParams } from 'ag-grid-community/dist/lib/rendering/cellRenderers/iCellRenderer';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
+import { atomNotification } from '../../../../recoil/atoms/notification';
 import { StudyStatus } from '../../../../types/enums/study-status';
+import { MessageType } from '../../../../types/notification';
 import { ResultQueryData } from '../../../../types/result-query-data';
-import { StartAnalyzePostData } from '../../../../types/start-analyze-post-data';
 import { post } from '../../../../utils/api/api';
 
 function AnalyzeOrNavigateCell(params: ICellRendererParams<ResultQueryData>) {
+	const setNotification = useSetRecoilState(atomNotification);
 	const navigate = useNavigate();
 
 	// 導頁事件
 	const handleNavigateToResult = useCallback(() => {
-		navigate(`/results/seriesKey/${params.data?.series_key}`);
+		navigate(`/results/studyInstanceUid/${params.data?.studyInstanceUID}`, { state: params.data });
 	}, [navigate, params.data]);
 
 	// 開始分析
 	const handleAnalyze = useCallback(() => {
 		if (params.data === undefined) return;
-		post<undefined, StartAnalyzePostData>(`/api/startAnalyze/seriesKey/${params.data?.series_key}`, {
-			patient_key: params.data?.patient_key,
-			patient_id: params.data?.patient_id,
-			study_key: params.data?.study_key,
-			study_uid: params.data?.study_uid,
-			series_key: params.data?.series_key,
-			series_uid: params.data?.series_uid,
-		})
+		post<undefined, undefined>(`/api/startAnalyze/studyInstanceUid/${params.data?.studyInstanceUID}`)
 			.then(() => {})
 			.catch((err) => {
-				console.error(err);
+				setNotification({
+					messageType: MessageType.Error,
+					message: err.message,
+				});
 			});
-	}, [params.data]);
+	}, [setNotification, params.data]);
 
 	// 根據Status渲染元件
 	const renderComponent = () => {
-		if (params.data?.status_code === StudyStatus.Success)
+		if (params.data?.statusCode === StudyStatus.Success)
 			return (
 				// eslint-disable-next-line jsx-a11y/anchor-is-valid
 				<Link
@@ -56,7 +55,7 @@ function AnalyzeOrNavigateCell(params: ICellRendererParams<ResultQueryData>) {
 				</Link>
 			);
 
-		if (params.data?.status_code === StudyStatus.Ready) {
+		if (params.data?.statusCode === StudyStatus.Ready) {
 			return (
 				<Button fullWidth variant="contained" onClick={handleAnalyze}>
 					Start Analyze

@@ -1,18 +1,21 @@
 import React from 'react';
 
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
-import classes from '../Results/Results.module.scss';
+import classes from './ChartLayout.module.scss';
 
 interface Props {
 	title: string;
+	minHeight?: string;
 	children: React.ReactNode;
 }
 
-function ChartLayout({ title, children }: Props) {
+function ChartLayout({ title, minHeight = '50%', children }: Props) {
 	return (
-		<Box display="flex" flexDirection="column" minHeight="50%" p={2}>
-			<h2 className={classes.title}>{title}</h2>
+		<Box display="flex" flexDirection="column" minHeight={minHeight} p={2}>
+			<Typography variant="h4" sx={{ margin: 'auto' }}>
+				{title}
+			</Typography>
 			<Box className={classes.chartContainer}>{children}</Box>
 		</Box>
 	);
