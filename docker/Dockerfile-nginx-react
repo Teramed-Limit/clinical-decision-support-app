@@ -1,0 +1,13 @@
+# 使用 nginx 環境來部署 React 應用程式
+FROM nginx:1.19.0-alpine AS nginx_setup
+
+# 將打包好的 React 應用程式放入 nginx 中
+COPY ../dist /usr/share/nginx/html
+
+# 複製 nginx 預設的設定檔
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+

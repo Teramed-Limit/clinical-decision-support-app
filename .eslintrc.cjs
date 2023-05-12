@@ -69,6 +69,7 @@ module.exports = {
     "react/destructuring-assignment": 0,
     "react/static-property-placement": 0,
     "react/jsx-props-no-spreading": 0,
+    "react/jsx-no-useless-fragment": 0,
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",

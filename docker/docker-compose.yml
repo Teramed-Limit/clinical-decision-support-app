@@ -1,0 +1,25 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile-nginx-react
+    ports:
+      - "7000:80"
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile-json-server
+    ports:
+      - "3004:3004"
+
+#version: '3'
+#services:
+#  app:
+#    image: tf00117345/clinical-decision-support-app-app:latest
+#    ports:
+#      - "7000:80"
+#  api:
+#    image: tf00117345/clinical-decision-support-app-api:latest
+#    ports:
+#      - "3004:3004"

@@ -1,0 +1,14 @@
+# Dockerfile.json-server
+FROM node:14
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install json-server
+
+COPY ../src/fake-data/db.json .
+COPY ../src/fake-data/routes.json .
+
+EXPOSE 3004
+CMD ["npx", "json-server", "--host", "0.0.0.0", "db.json", "--routes", "routes.json", "--port", "3004"]
+
