@@ -2,7 +2,7 @@ import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 
 import EnvService from '../services/EnvService';
 import { StudyStatus } from '../types/enums/study-status';
-import { dateFilterParams } from '../utils/ag-grid-utils';
+import { FormField } from '../types/query-field';
 import { convertToDate, stringFormatDate } from '../utils/date-utils';
 
 export const define = {
@@ -12,23 +12,17 @@ export const define = {
 				field: 'patientId',
 				headerName: 'Patient Id',
 				width: 160,
-				filter: 'agTextColumnFilter',
-				floatingFilter: true,
 			},
 			{
 				field: 'patientsName',
 				headerName: 'Patient Name',
 				width: 160,
-				filter: 'agTextColumnFilter',
-				floatingFilter: true,
 			},
 			{
 				field: 'searchDateTime',
 				headerName: 'Upload Date',
 				width: 180,
 				filter: 'agDateColumnFilter',
-				filterParams: dateFilterParams,
-				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
 					if (params?.value) return convertToDate(new Date(params.value), EnvService.getDateTimeFormat());
 				},
@@ -37,9 +31,6 @@ export const define = {
 				field: 'studyDate',
 				headerName: 'Exam Date',
 				width: 140,
-				filter: 'agDateColumnFilter',
-				filterParams: dateFilterParams,
-				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
 					const date = stringFormatDate(params.value, 'yyyyMMdd');
 					return convertToDate(date, EnvService.getDateFormat());
@@ -49,23 +40,16 @@ export const define = {
 				field: 'patientsAge',
 				headerName: 'Age',
 				width: 100,
-				filter: 'agTextColumnFilter',
-				floatingFilter: true,
 			},
 			{
 				field: 'patientsSex',
 				headerName: 'Gender',
 				width: 100,
-				filter: 'agTextColumnFilter',
-				floatingFilter: true,
 			},
 			{
 				field: 'processDateTime',
 				headerName: 'Start Date',
 				width: 180,
-				filter: 'agDateColumnFilter',
-				filterParams: dateFilterParams,
-				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
 					if (params?.value) return convertToDate(new Date(params.value), EnvService.getDateTimeFormat());
 				},
@@ -74,9 +58,6 @@ export const define = {
 				field: 'receiveDateTime',
 				headerName: 'End Date',
 				width: 180,
-				filter: 'agDateColumnFilter',
-				filterParams: dateFilterParams,
-				floatingFilter: true,
 				valueFormatter: (params: ValueFormatterParams) => {
 					if (params?.value) return convertToDate(new Date(params.value), EnvService.getDateTimeFormat());
 				},
@@ -85,8 +66,6 @@ export const define = {
 				field: 'statusDescription',
 				headerName: 'Description',
 				width: 200,
-				filter: 'agTextColumnFilter',
-				floatingFilter: true,
 			},
 			{
 				field: 'statusCode',
@@ -118,3 +97,10 @@ export const define = {
 		] as ColDef[],
 	},
 };
+
+export const dbQueryField: FormField[] = [
+	{ id: 'patientId', label: 'Patient ID', type: 'Text' },
+	{ id: 'patientsName', label: 'Patient Name', type: 'Text' },
+	{ id: 'studyStartDate', label: 'Study Start Date', type: 'DataRange' },
+	{ id: 'studyEndDate', label: 'Study End Date', type: 'DataRange' },
+];

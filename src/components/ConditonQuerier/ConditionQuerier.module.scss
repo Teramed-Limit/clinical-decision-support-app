@@ -1,0 +1,14 @@
+.queryCondition {
+    display: flex;
+    flex-direction: row;
+
+
+    > * {
+        margin: 0 4px !important;
+    }
+}
+
+.icon {
+    width: 36px;
+    height: 36px;
+}

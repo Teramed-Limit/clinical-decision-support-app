@@ -48,6 +48,8 @@ function GridTable<T = any>({
 		return {
 			sortable: true,
 			resizable: true,
+			floatingFilter: false,
+			filter: null,
 		};
 	}, []);
 

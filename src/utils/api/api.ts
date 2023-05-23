@@ -30,10 +30,12 @@ const request = async <T, D = any>(method: string, url: string, data?: D) => {
 		throw new Error('Instance not created yet');
 	}
 
+	// 如果method是get，那么data就是params
 	const response: AxiosResponse<T> = await instance({
 		method,
 		url,
 		data,
+		params: method === 'get' ? data : undefined,
 	});
 
 	return response.data;
