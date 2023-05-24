@@ -19,34 +19,31 @@ import Results from './container/Results/Results';
 import { rootTheme } from './theme';
 import { fetchAppConfig } from './utils/api/api';
 
-const router = createBrowserRouter(
-	[
-		{
-			path: '/',
-			element: <App />,
-			children: [
-				{
-					errorElement: <NotFound />,
-					children: [
-						{
-							index: true,
-							element: <Home />,
-						},
-						{
-							path: 'results/studyInstanceUid/:studyInstanceUid',
-							element: <Results />,
-						},
-						{
-							path: '*',
-							element: <NotFound />,
-						},
-					],
-				},
-			],
-		},
-	],
-	{ basename: '/clinical-decision-support-app' },
-);
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <App />,
+		children: [
+			{
+				errorElement: <NotFound />,
+				children: [
+					{
+						index: true,
+						element: <Home />,
+					},
+					{
+						path: 'results/studyInstanceUid/:studyInstanceUid',
+						element: <Results />,
+					},
+					{
+						path: '*',
+						element: <NotFound />,
+					},
+				],
+			},
+		],
+	},
+]);
 
 fetchAppConfig().then(() => {
 	ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
