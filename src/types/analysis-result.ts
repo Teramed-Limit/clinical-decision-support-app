@@ -2,6 +2,7 @@ export interface AnalysisResult {
 	segmentationPath: string;
 	saliencyMapPath: string;
 	studyUid: string;
+	metastasisPrediction: number;
 	confidence: Confidence[];
 	featureImportance: FeatureImportance[];
 	similarCases: SimilarCase[];

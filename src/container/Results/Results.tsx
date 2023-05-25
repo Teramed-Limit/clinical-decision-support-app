@@ -4,10 +4,12 @@ import { Box, Stack, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
+import 'react-circular-progressbar/dist/styles.css';
 import classes from './Results.module.scss';
 import BarChartComp from '../../components/Chart/BarChart/BarChart';
 import PieChartComp from '../../components/Chart/PieChart/PieChart';
 import RadarChartComp from '../../components/Chart/RadarChart/RadarChart';
+import CircularProgressBar from '../../components/CircularProgressBar/CircularProgressBar';
 import OverlapImage from '../../components/OverlapImage/OverlapImage';
 import ResultHeader, { headerInfoHeight } from '../../components/ResultHeader/ResultHeader';
 import { atomNotification } from '../../recoil/atoms/notification';
@@ -96,6 +98,13 @@ function Results() {
 			</ChartLayout>
 			<ChartLayout title="Feature Importance">
 				<BarChartComp data={analysisResult.featureImportance} />
+			</ChartLayout>
+			{/*	Metastasis Prediction */}
+			<ChartLayout title="Clinical Outcome">
+				<CircularProgressBar
+					title="Metastasis happens in a chance of"
+					value={analysisResult?.metastasisPrediction}
+				/>
 			</ChartLayout>
 		</Box>
 	) : (
