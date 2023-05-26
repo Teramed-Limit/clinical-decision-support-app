@@ -3,6 +3,7 @@ import { useCallback, useEffect } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import { Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import { GetRowIdParams } from 'ag-grid-community';
 import { format } from 'date-fns';
 
 import ConditionQuerier from '../../components/ConditonQuerier/ConditionQuerier';
@@ -66,6 +67,10 @@ function Home() {
 		}));
 	};
 
+	const getRowNodeId = (params: GetRowIdParams<ResultQueryData>) => {
+		return params.data.studyInstanceUID;
+	};
+
 	useEffect(
 		() => onQuery(queryPairData),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -94,6 +99,7 @@ function Home() {
 					columnDefs={colDefs}
 					rowData={rowData}
 					gridReady={gridReady}
+					getRowId={getRowNodeId}
 				/>
 			</Stack>
 		</Stack>

@@ -24,18 +24,32 @@ function AnalyzeOrNavigateCell(params: ICellRendererParams<ResultQueryData>) {
 	const handleAnalyze = useCallback(() => {
 		if (params.data === undefined) return;
 		post<undefined, undefined>(`/api/startAnalyze/studyInstanceUid/${params.data?.studyInstanceUID}`)
-			.then(() => {})
+			.then(() => {
+				if (params.data === undefined) return;
+
+				// params.api.applyTransaction({ update: [{ ...params.data, statusCode: 1 }] });
+				const rowNode = params.api.getRowNode(params.data?.studyInstanceUID);
+				if (rowNode) {
+					params.api.refreshCells({ force: true, rowNodes: [rowNode] });
+					rowNode.setDataValue('statusCode', 1);
+				}
+
+				setNotification({
+					messageType: MessageType.Success,
+					message: 'Starting Analyze',
+				});
+			})
 			.catch((err) => {
 				setNotification({
 					messageType: MessageType.Error,
 					message: err.message,
 				});
 			});
-	}, [setNotification, params.data]);
+	}, [params, setNotification]);
 
 	// 根據Status渲染元件
-	const renderComponent = () => {
-		if (params.data?.statusCode === StudyStatus.Success)
+	const renderComponent = (statusCode: StudyStatus | undefined) => {
+		if (statusCode === StudyStatus.Success)
 			return (
 				// eslint-disable-next-line jsx-a11y/anchor-is-valid
 				<Link
@@ -55,7 +69,7 @@ function AnalyzeOrNavigateCell(params: ICellRendererParams<ResultQueryData>) {
 				</Link>
 			);
 
-		if (params.data?.statusCode === StudyStatus.Ready) {
+		if (statusCode === StudyStatus.Ready) {
 			return (
 				<Button fullWidth variant="contained" onClick={handleAnalyze}>
 					Start Analyze
@@ -76,7 +90,7 @@ function AnalyzeOrNavigateCell(params: ICellRendererParams<ResultQueryData>) {
 				height: '100%',
 			}}
 		>
-			{renderComponent()}
+			{renderComponent(params.data?.statusCode)}
 		</Box>
 	);
 }

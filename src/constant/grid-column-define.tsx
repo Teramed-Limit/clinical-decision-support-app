@@ -3,6 +3,7 @@ import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import EnvService from '../services/EnvService';
 import { StudyStatus } from '../types/enums/study-status';
 import { FormField } from '../types/query-field';
+import { ResultQueryData } from '../types/result-query-data';
 import { convertToDate, stringFormatDate } from '../utils/date-utils';
 
 export const define = {
@@ -92,6 +93,9 @@ export const define = {
 				width: 120,
 				cellStyle: { padding: '4px' },
 				cellRenderer: 'analyzeOrNavigateRenderer',
+				valueFormatter: (params: ValueFormatterParams<ResultQueryData>) => {
+					return `${params.data?.studyInstanceUID}_${params.data?.statusCode}`;
+				},
 				pinned: 'right',
 			},
 		] as ColDef[],
