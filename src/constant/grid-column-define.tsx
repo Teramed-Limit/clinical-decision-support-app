@@ -65,8 +65,8 @@ export const define = {
 			},
 			{
 				field: 'statusDescription',
-				headerName: 'Description',
-				width: 200,
+				headerName: 'Description',				
+				flex: 1,
 			},
 			{
 				field: 'statusCode',

@@ -48,7 +48,7 @@ function OverlapImage({ images, opacityData }: Props) {
 			<Box
 				sx={{
 					position: 'absolute',
-					bottom: '10px',
+					bottom: '30px',
 					width: '50%',
 					opacity: 0,
 					transition: 'opacity 0.3s',

@@ -19,16 +19,24 @@ import { get } from '../../utils/api/api';
 import ChartLayout from '../ChartLayout/ChartLayout';
 
 type GridItemProps = {
-	title: string;
+	title?: string;
 	children?: React.ReactNode;
 };
 
 function Item({ title, children }: GridItemProps) {
 	return (
-		<Stack direction="column" width="50%" height="50%" p="2px">
+		<Stack direction="column" width="50%" height="100%" p="2px">
 			<Typography textAlign="center" variant="h4">
 				{title}
 			</Typography>
+			{children}
+		</Stack>
+	);
+}
+
+function ImageItem({ children }: GridItemProps) {
+	return (
+		<Stack direction="column" width="33%" height="100%" p="2px">
 			{children}
 		</Stack>
 	);
@@ -65,36 +73,52 @@ function Results() {
 			{/* Image */}
 			<Stack
 				direction="row"
+				justifyContent="space-between"
 				p={1}
 				flexWrap="wrap"
-				sx={{ height: `calc(100% - ${headerInfoHeight}px)`, minHeight: `calc(100% - ${headerInfoHeight}px)` }}
+				sx={{
+					height: `calc(100% - ${headerInfoHeight}px)`,
+					minHeight: `calc(100% - ${headerInfoHeight}px)`,
+					width: '100%',
+				}}
 			>
-				<Item title="Segmentation">
+				<Typography
+					textAlign="center"
+					variant="h4"
+					component="div"
+					display="inline-block"
+					style={{ width: '100%' }}
+				>
+					Segmentation and Saliency Map
+				</Typography>
+				<ImageItem>
 					<div className={classes.imageContainer}>
 						<img className={classes.image} src={analysisResult.segmentationPath} alt="" />
 					</div>
-				</Item>
-				<Item title="Saliency Map">
+				</ImageItem>
+				<ImageItem>
 					<div className={classes.imageContainer}>
 						<img className={classes.image} src={analysisResult.saliencyMapPath} alt="" />
 					</div>
-				</Item>
-				<Item title="Overlap">
-					<OverlapImage
-						images={[analysisResult.segmentationPath, analysisResult.saliencyMapPath]}
-						opacityData={[
-							{ label: 'Segmentation', opacity: 1 },
-							{ label: 'Saliency Map', opacity: 0.5 },
-						]}
-					/>
-				</Item>
-				<Item title="Classification">
-					<PieChartComp data={analysisResult.confidence} />
-				</Item>
+				</ImageItem>
+				<ImageItem>
+					<div className={classes.imageContainer}>
+						<OverlapImage
+							images={[analysisResult.segmentationPath, analysisResult.saliencyMapPath]}
+							opacityData={[
+								{ label: 'Segmentation', opacity: 1 },
+								{ label: 'Saliency Map', opacity: 0.5 },
+							]}
+						/>
+					</div>
+				</ImageItem>
 			</Stack>
 			{/* Chart */}
-			<ChartLayout title="Similar Cases">
-				<RadarChartComp filter data={analysisResult.similarCases} />
+			<ChartLayout title="Classification" minHeight={'75%'}>
+				<PieChartComp data={analysisResult.confidence} />
+			</ChartLayout>
+			<ChartLayout title="Similar Cases" minHeight={'75%'}>
+				<RadarChartComp data={analysisResult.similarCases} />
 			</ChartLayout>
 			<ChartLayout title="Feature Importance">
 				<BarChartComp data={analysisResult.featureImportance} />

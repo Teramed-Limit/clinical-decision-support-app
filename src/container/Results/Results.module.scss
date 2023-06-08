@@ -1,16 +1,15 @@
 .image {
-    width: auto;
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+	width: auto;
+	max-width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;    
 }
 
-
 .imageContainer {
-    width: 100%;
-    display: flex;
-    flex: 1 1 auto;
-    justify-content: center;
-    align-items: center;
+	width: 100%;	
+	display: flex;
+	flex: 1 1 auto;
+	justify-content: center;
+	align-items: center;
 }
