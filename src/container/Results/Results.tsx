@@ -19,20 +19,8 @@ import { get } from '../../utils/api/api';
 import ChartLayout from '../ChartLayout/ChartLayout';
 
 type GridItemProps = {
-	title?: string;
 	children?: React.ReactNode;
 };
-
-function Item({ title, children }: GridItemProps) {
-	return (
-		<Stack direction="column" width="50%" height="100%" p="2px">
-			<Typography textAlign="center" variant="h4">
-				{title}
-			</Typography>
-			{children}
-		</Stack>
-	);
-}
 
 function ImageItem({ children }: GridItemProps) {
 	return (
@@ -114,10 +102,10 @@ function Results() {
 				</ImageItem>
 			</Stack>
 			{/* Chart */}
-			<ChartLayout title="Classification" minHeight={'75%'}>
+			<ChartLayout title="Classification" minHeight="75%">
 				<PieChartComp data={analysisResult.confidence} />
 			</ChartLayout>
-			<ChartLayout title="Similar Cases" minHeight={'75%'}>
+			<ChartLayout title="Similar Cases" minHeight="75%">
 				<RadarChartComp data={analysisResult.similarCases} />
 			</ChartLayout>
 			<ChartLayout title="Feature Importance">
