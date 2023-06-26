@@ -1,24 +1,24 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 
-import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
+import AppBar from '@mui/material/AppBar';
+import Dialog from '@mui/material/Dialog';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import Slide from '@mui/material/Slide';
-
+import Toolbar from '@mui/material/Toolbar';
 import { TransitionProps } from '@mui/material/transitions';
+import Typography from '@mui/material/Typography';
+
 import { labelValueData } from '../../types/reference-case';
 
-/*********************************************************************************
+/** *******************************************************************************
  * Parameter
- *********************************************************************************/
-export interface DetailListProps {	
+ ******************************************************************************** */
+export interface DetailListProps {
 	labelValueDataset: labelValueData[];
 }
 /** *****************************************************************************
@@ -27,9 +27,9 @@ export interface DetailListProps {
 export type FullScreenListService = {
 	handleShawDialog: (isOpen: boolean) => void;
 };
-/*********************************************************************************
+/** *******************************************************************************
  * Transition
- *********************************************************************************/
+ ******************************************************************************** */
 const Transition = forwardRef(function Transition(
 	props: TransitionProps & {
 		children: React.ReactElement;
@@ -38,30 +38,30 @@ const Transition = forwardRef(function Transition(
 ) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
-/*********************************************************************************
+/** *******************************************************************************
  * Full screen dialog
- *********************************************************************************/
+ ******************************************************************************** */
 const FullScreenDetailList = forwardRef<FullScreenListService, DetailListProps>((Props, ref) => {
-	//#region useState
+	// #region useState
 	const [open, setOpen] = useState(false);
-	//#endregion
+	// #endregion
 
-	//#region useImperativeHandle
+	// #region useImperativeHandle
 	useImperativeHandle(ref, () => ({
 		handleShawDialog: (isOpen) => setOpen(isOpen),
 	}));
-	//#endregion
+	// #endregion
 
-	//#region function
+	// #region function
 	const handleClose = () => {
 		setOpen(false);
 	};
-	//#endregion
+	// #endregion
 
 	return (
 		<div>
 			<Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-				<AppBar sx={{ position: 'relative' }}>
+				<AppBar sx={{ position: 'sticky' }}>
 					<Toolbar>
 						<IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
 							<CloseIcon />
@@ -73,7 +73,7 @@ const FullScreenDetailList = forwardRef<FullScreenListService, DetailListProps>(
 				</AppBar>
 				<List>
 					{Props.labelValueDataset.map((data) => (
-						<div>
+						<div key={data.label}>
 							<ListItem>
 								<ListItemText
 									sx={{ whiteSpace: 'pre-wrap' }}
