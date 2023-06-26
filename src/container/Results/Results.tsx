@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, FormControlLabel, Stack, Switch, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
@@ -39,6 +39,19 @@ function Results() {
 	const { studyInstanceUid } = useParams();
 	const [analysisResult, setAnalysisResult] = useState<AnalysisResult>();
 
+	const [showHCCMetastasisPrediction, setShowHCCMetastasisPrediction] = React.useState(false);
+	const elementRef = useRef<HTMLDivElement>(null);
+
+	const scrollToBottom = () => {
+		if (elementRef?.current?.parentElement) {
+			const element = elementRef.current.parentElement;
+			element.scrollTo({
+				top: element.scrollHeight,
+				behavior: 'smooth',
+			});
+		}
+	};
+
 	// 獲取數據
 	useEffect(() => {
 		get<AnalysisResult>(`/api/result/studyInstanceUid/${studyInstanceUid}`)
@@ -55,7 +68,13 @@ function Results() {
 	}, [navigate, setNotification, studyInstanceUid]);
 
 	return analysisResult ? (
-		<Box display="flex" flexDirection="column" overflow-y="auto" height={`calc(100vh - ${appbarHeight}px)`}>
+		<Box
+			ref={elementRef}
+			display="flex"
+			flexDirection="column"
+			overflow-y="auto"
+			height={`calc(100vh - ${appbarHeight}px)`}
+		>
 			{/* Header */}
 			<ResultHeader />
 			{/* Image */}
@@ -108,16 +127,38 @@ function Results() {
 			<ChartLayout title="Similar Cases" minHeight="75%">
 				<RadarChartComp data={analysisResult.similarCases} />
 			</ChartLayout>
-			<ChartLayout title="Feature Importance">
-				<BarChartComp data={analysisResult.featureImportance} />
-			</ChartLayout>
-			{/*	Metastasis Prediction */}
-			<ChartLayout title="Clinical Outcome">
-				<CircularProgressBar
-					title="Metastasis happens in a chance of"
-					value={analysisResult?.metastasisPrediction}
-				/>
-			</ChartLayout>
+			<FormControlLabel
+				sx={{ display: 'flex', alignSelf: 'center' }}
+				label={
+					<Typography variant="h4" sx={{ margin: 'auto' }}>
+						HCC metastasis prediction
+					</Typography>
+				}
+				control={
+					<Switch
+						checked={showHCCMetastasisPrediction}
+						onChange={(event) => {
+							setShowHCCMetastasisPrediction(event.target.checked);
+							setTimeout(() => scrollToBottom());
+						}}
+					/>
+				}
+			/>
+			{showHCCMetastasisPrediction && (
+				<>
+					{/* Feature Importance */}
+					<ChartLayout minHeight="calc(50% - 32px)" title="Feature Importance">
+						<BarChartComp data={analysisResult.featureImportance} />
+					</ChartLayout>
+					{/*	Metastasis Prediction */}
+					<ChartLayout minHeight="calc(50% - 32px)" title="Clinical Outcome">
+						<CircularProgressBar
+							title="Metastasis happens in a chance of"
+							value={analysisResult?.metastasisPrediction}
+						/>
+					</ChartLayout>
+				</>
+			)}
 		</Box>
 	) : (
 		<Box />
